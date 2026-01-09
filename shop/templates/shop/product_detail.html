@@ -1,0 +1,10 @@
+{% extends 'shop/layout.html' %}
+{% block title %}{{ product.title }}{% endblock %}
+{% block content %}
+    <h2>{{ product.title }}</h2>
+    <p>Ціна: {{ product.price }} грн</p>
+    <p>Кількість: {{ product.product_qty }}</p>
+    <p>Категорія: {{ product.category.title }}</p>
+    <p>Створено: {{ product.created_at }}</p>
+    <p>Оновлено: {{ product.update_at }}</p>
+{% endblock %}

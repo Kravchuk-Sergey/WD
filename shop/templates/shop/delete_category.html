@@ -1,0 +1,9 @@
+{% extends 'shop/layout.html' %}
+{% block title %}Видалити категорію{% endblock %}
+{% block content %}
+    <h2>Видалити {{ category.title }}?</h2>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Так</button>
+    </form>
+{% endblock %}

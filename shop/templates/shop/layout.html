@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Мій магазин{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'shop/css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Мій магазин</h1>
+        <nav>
+            <a href="{% url 'categories' %}">Категорії</a> | <a href="{% url 'products' %}">Товари</a>
+        </nav>
+        <hr>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <hr>
+        <p>© 2025 Мій магазин</p>
+    </footer>
+</body>
+</html>

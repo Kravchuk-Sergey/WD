@@ -1,0 +1,10 @@
+{% extends 'shop/layout.html' %}
+{% block title %}Редагувати товар{% endblock %}
+{% block content %}
+    <h2>Редагувати товар</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Редагувати</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'shop/layout.html' %}
+{% load static %}
+
+{% block title %}Товари{% endblock %}
+
+{% block content %}
+    <h2>Товари</h2>
+    <a href="{% url 'product-create' %}">Додати товар</a>
+
+    <ul class="product-list">
+        {% for product in products %}
+            <li>
+                <div class="product-card">
+                    <img src="{% static 'shop/images/' %}{{ product.image_name|default:'placeholder.jpg' }}" alt="{{ product.title }}">
+
+                    <h3>
+                        <a href="{% url 'product-detail' product.slug %}">{{ product.title }}</a>
+                    </h3>
+
+                    <p class="price">{{ product.price }} грн</p>
+
+                    <button class="add-to-cart">Додати в кошик</button>
+
+                    <div style="margin-top: 10px; font-size: 0.9em;">
+                        <a href="{% url 'product-update' product.slug %}">Редагувати</a> |
+                        <a href="{% url 'product-delete' product.slug %}" style="color: red;">Видалити</a>
+                    </div>
+                </div>
+            </li>
+        {% empty %}
+            <li>Немає товарів</li>
+        {% endfor %}
+    </ul>
+
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; перша</a>
+            <a href="?page={{ page_obj.previous_page_number }}">попередня</a>
+        {% endif %}
+        <span>Сторінка {{ page_obj.number }} з {{ page_obj.paginator.num_pages }}</span>
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">наступна</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">остання &raquo;</a>
+        {% endif %}
+    </div>
+{% endblock %}
