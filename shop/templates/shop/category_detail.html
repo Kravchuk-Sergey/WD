@@ -1,6 +1,25 @@
 {% extends 'shop/layout.html' %}
+
 {% block title %}{{ category.title }}{% endblock %}
+
 {% block content %}
     <h2>{{ category.title }}</h2>
     <p>Створено: {{ category.created_at }}</p>
+
+    <h3>Товари в цій категорії:</h3>
+    {% if products %}
+        <ul class="product-list">
+            {% for product in products %}
+                <li>
+                    <div class="product-card">
+                        <h4><a href="{% url 'product-detail' product.slug %}">{{ product.title }}</a></h4>
+                        <p class="price">{{ product.price }} грн</p>
+                        <p>Кількість: {{ product.product_qty }}</p>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>У цій категорії ще немає товарів.</p>
+    {% endif %}
 {% endblock %}

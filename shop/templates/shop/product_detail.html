@@ -1,8 +1,20 @@
 {% extends 'shop/layout.html' %}
+
 {% block title %}{{ product.title }}{% endblock %}
+
 {% block content %}
     <h2>{{ product.title }}</h2>
+
     <p>Ціна: {{ product.price }} грн</p>
+
+    <form action="{% url 'cart_add_form' product.id %}" method="post">
+        {% csrf_token %}
+        <label>Кількість:
+            <input type="number" name="quantity" value="1" min="1" class="form-control w-25 d-inline">
+        </label>
+        <button type="submit" class="btn btn-primary">Додати в кошик</button>
+    </form>
+
     <p>Кількість: {{ product.product_qty }}</p>
     <p>Категорія: {{ product.category.title }}</p>
     <p>Створено: {{ product.created_at }}</p>

@@ -13,4 +13,10 @@ urlpatterns = [
     path('products/<slug:slug>/update/', views.update_product, name='product-update'),
     path('categories/<slug:slug>/delete/', views.delete_category, name='category-delete'),
     path('products/<slug:slug>/delete/', views.delete_product, name='product-delete'),
+    path('cart/', views.cart_detail, name='cart_detail'),
+    path('cart/add/<int:product_id>/', views.cart_add, name='cart_add'),
+    path('cart/add/form/<int:product_id>/', views.cart_add_form, name='cart_add_form'),
+    path('cart/remove/<int:product_id>/', views.cart_remove, name='cart_remove'),
+    path('cart/add/<int:product_id>/', views.cart_add_form, name='cart_add_form'),
+    path('cart/add/ajax/<int:product_id>/', views.cart_add, name='cart_add_ajax'),
 ]

@@ -1,5 +1,6 @@
 {% extends 'shop/layout.html' %}
 {% load static %}
+{% csrf_token %}
 
 {% block title %}Товари{% endblock %}
 
@@ -11,7 +12,7 @@
         {% for product in products %}
             <li>
                 <div class="product-card">
-                    <img src="{% static 'shop/images/' %}{{ product.image_name|default:'placeholder.jpg' }}" alt="{{ product.title }}">
+                    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'shop/images/placeholder.jpg' %}{% endif %}" alt="{{ product.title }}" class="product-image">
 
                     <h3>
                         <a href="{% url 'product-detail' product.slug %}">{{ product.title }}</a>
@@ -19,7 +20,7 @@
 
                     <p class="price">{{ product.price }} грн</p>
 
-                    <button class="add-to-cart">Додати в кошик</button>
+                    <button class="add-to-cart" data-product-id="{{ product.id }}">Додати в кошик</button>
 
                     <div style="margin-top: 10px; font-size: 0.9em;">
                         <a href="{% url 'product-update' product.slug %}">Редагувати</a> |
@@ -43,4 +44,43 @@
             <a href="?page={{ page_obj.paginator.num_pages }}">остання &raquo;</a>
         {% endif %}
     </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const buttons = document.querySelectorAll('.add-to-cart');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const productId = this.getAttribute('data-product-id');
+
+                fetch(`/cart/add/${productId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ quantity: 1 })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Товар додано в кошик!');
+                        const cartCount = document.querySelector('#cart-count');
+                        if (cartCount) {
+                            cartCount.textContent = parseInt(cartCount.textContent) + 1;
+                        }
+                    } else {
+                        alert('Помилка при додаванні: ' + data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('Помилка:', error);
+                    alert('Сталася помилка при додаванні товару');
+                });
+            });
+        });
+    });
+    </script>
 {% endblock %}

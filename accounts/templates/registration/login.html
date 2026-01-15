@@ -1,0 +1,31 @@
+{% extends 'shop/layout.html' %}
+
+{% block title %}Вхід{% endblock %}
+
+{% block content %}
+    <div class="auth-container">
+        <h2>Вхід</h2>
+
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                Неправильний логін або пароль. Спробуйте ще раз.
+            </div>
+        {% endif %}
+
+        {% if next %}
+            <div class="alert alert-info">
+                Будь ласка, увійдіть, щоб продовжити роботу.
+            </div>
+        {% endif %}
+
+        <form method="post" class="auth-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Увійти</button>
+        </form>
+
+        <p class="text-center mt-3">
+            Немає акаунту? <a href="{% url 'register' %}" class="auth-link">Зареєструватися</a>
+        </p>
+    </div>
+{% endblock %}

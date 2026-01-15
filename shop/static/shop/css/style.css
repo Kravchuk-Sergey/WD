@@ -161,3 +161,88 @@ h2 {
     margin-bottom: 20px;
     color: #333;
 }
+
+/* Стилі для accounts (реєстрація, вхід, профіль) */
+
+/* Контейнер форми */
+.auth-container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 30px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Заголовки форм */
+.auth-container h2 {
+    text-align: center;
+    color: #007bff;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+/* Форми */
+.auth-form .form-control {
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ced4da;
+}
+
+.auth-form .form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Кнопки */
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1.1em;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+/* Повідомлення (messages) */
+.alert {
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* Аватар у профілі */
+.profile-avatar {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid #007bff;
+    margin: 20px auto;
+    display: block;
+}
+
+/* Посилання */
+.auth-link {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.auth-link:hover {
+    text-decoration: underline;
+}
